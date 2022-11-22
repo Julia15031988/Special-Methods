@@ -1,0 +1,358 @@
+
+#1
+
+#Special fields
+#creating the class
+class Alpha:
+    "Class Alpha and class Bravo"
+    def hello():
+        pass
+    class Bravo:
+        pass
+ #derivative from Alpha
+class Charlie(Alpha):
+    pass
+#derivative from charlie
+class Delta(Charlie):
+    pass
+
+#creating the specimen
+obj=Alpha()
+#the field __class__ of the specimen
+print ("The field  __class__ of ")
+print ("The specimen obj : ", obj.__class__)
+#the field __class__ of the class
+print ("The class Alpha:", Alpha.__class__)
+print ("The class of Alpha.Bravo:", Alpha.Bravo.__class__)
+print ("The class Charlie :" , Charlie.__class__)
+
+#fields  __bases__ and __mro__
+print ("\n Fields __bases__ and __mro__ " )
+print("Class Delta, field __bases__ " , Delta. __bases__)
+print("Class Delta, field __mro__ " , Delta.__mro__)
+print("Class Alpha, field __bases__ " , Alpha.__bases__)
+print("Class Alpha, field __bases__ " , Delta.__mro__)
+
+#the __doc__ fields
+print ("\n field the __doc")
+print ("The description of the class Alpha: " , Alpha.__doc__)
+Delta.__doc__ =" Thr class Delta comes fron Charlie"
+print ("The description of the class Delta: " , Delta.__doc__)
+
+#the field  __module_
+print ("\n  the field __module__" )
+print ( "the module of classs Alpha ", Alpha.__module__)
+
+#the field __dict__
+print ("\n the field __dict__")
+print ("The attributes of class Alpha ", Alpha.__dict__)
+print ("The attributes of class Alpha, Bravo ", Alpha.Bravo.__dict__)
+print ("The attributes of class Delta ", Delta.__dict__)
+
+#the fields __name__ and __qualname__
+print ("\n the fields __name__ and __qualname__")
+print ("The class Alpha, field __name__", Alpha.__name__)
+print ("The class Alpha, field __qualname__", Alpha.__qualname__)
+print ("The class Bravo, field __name__", Bravo.__name__)
+print ("The class Bravo, field __qualname__", Bravo.__qualname__)
+print ("The class Delta, field __name__", Delta.__name__)
+print ("The class Delta, field __qualname__", Delta.__qualname__)
+
+
+#2
+
+
+#the call method
+#the calss
+class Box:
+    #constructor
+    def  __init__(self, width, height, depth):
+        #fields
+        self.width = width
+        self.height= height
+        self.depth= depth
+    #the  __call__ method
+    def __call__(self):
+        #calculation
+        volume =self.width*self.height*self.depth
+        #reflect the volume
+        print("The volume is", volume)
+#Create class object
+obj=Box(10,20,30)
+#calling like a function
+obj()
+
+
+#3
+
+#method __call__ with arguments
+#creating the class
+class Box:
+    #the constructor
+    def __init__(self, width, height, depth):
+        print ("the volume is", self(width,height,depth))
+
+     #the method  __call__
+    def __call__(self, width,  height, depth):
+        self.width = width
+        self.height = height
+        self.depth = depth
+        volume=self.depth*self.height*self.width
+        return volume
+ #creating an example
+obj=Box(10,20,30)
+#calling like a function
+print ("The new meaning", obj(1,2,3))
+
+
+#4
+casting methods
+#class
+class MyClass:
+    #constructor
+    def __init__(self, nums):
+        #create field  -empty list
+        self.nums=list()
+        #the cycle operator for sorting
+        #elements in arg nums
+        # this is the list or the set
+        for n in nums:
+            self.nums.append(n)
+    #method for creatong string
+    def __str__(self):
+        #the meaning of first row
+        txt  ="The value of field - the list!"
+        #checking the elements in nums
+        #which is field of specimen
+        for n in self.nums:
+            txt+=str(n) + "|"
+            return  txt
+    #method for making integer
+    def __init__(self):
+        #result of the method(the number
+        #of elements in nums-field of specimen
+        return len(self.nums)
+    #method for creating the float
+    def __float__(self):
+        #the middle value of elements in the
+        #list nums - the field of specimen
+        avr=sum(self.nums)/int(self)
+        #the result of the method
+        return avr
+    #method for creating the bool
+    def __bool__(self):
+        #If the number of elements is odd
+        if int(self)/2==1:
+            return True
+        else:
+            return False
+    #method for making complex
+    def __complex__(self):
+        #the minimalfrom numbers in the list
+        mn=min(self.nums)
+        #the maximun number in the list
+        mx=max(self.nums)
+        #the complex number
+        z=complex(mx,mn)
+        return z
+#create class specimen
+obj=MyClass({2.8, 4.1, 7.5, 2.5, 3.2})
+#printing the specimen where string
+print(obj)
+#print where integer
+print("there are next number of the elements in the list", int(obj))
+#where bool
+if obj:
+    print ("The odd number of elements")
+ #print where float
+print ("The average value", float(obj))
+ #print where complex
+print("The maximum and minimum", complex(obj))
+
+
+#5
+
+#Instance "rounding" and other operations
+#class
+class MyClass:
+    #the constructor
+    def __init__(self,txt):
+        #adding value to the field of class specimen
+        self.name = txt
+    #method for malink strings
+    def __str__(self):
+        #the result of thr mrthod
+        #the value of the field name
+        return self.name
+    #method for the calculating the length
+    #of specimen of the class
+    #using the function len
+    def __len__(self):
+        #the result of the method
+        #number of elements in the field of specimen
+        return len(self.name)
+    #special method
+    def __index__(self):
+        #the number of__ +1
+        p=self.name.count("")+1
+        return p
+    def __round__(self):
+        self.name="Clearing the value"
+        return self
+txt= "One, two, three, four, five..."
+txt+="\nThe five birds fly"
+
+obj=MyClass(txt)
+print (obj)
+print ("The number of (letters)symbols:", len(obj))
+print ("The number of the words:", obj.__index__())
+print (bin(obj))
+print (oct(obj))
+print(hex(obj))
+print (round(obj))
+print(obj)
+
+
+#6
+
+#Instance operations via index
+#creating class
+class MyClass:
+    #field of the class
+    Nmax=5
+    #the constructor
+    def __init__(self):
+        #the number of the elements
+        n=MyClass.Nmax
+        #the list with zero elements
+        self.nums=[0 for i in range(n)]
+    #method for makong strings
+    def __str__(self):
+        txt="|"
+        #creating the text
+        for s in self.nums:
+            txt+="" +str(s)+"|"
+        return txt
+
+    #the method about assignment by the index
+    def __setitem__(self, i, v):
+        k=i%len(self.nums)
+        self.nums[k]=v
+    #the method about the reading by the index
+    def __getitem__(self, i):
+        k = i % len(self.nums)
+        return self.nums[k]
+    #The method for deleting the meaning by the index
+    def __delitem__(self, i):
+        k=i%len(self.nums)
+        #the nes meaning
+        self.nums[k]="*"
+  #create specimen of thr class
+obj=MyClass()
+print (obj)
+#new values of the lisr elements
+obj[0]=100
+obj[2]=-3
+obj[24]=123
+print (obj)
+print ("The element with index 4 = ", obj[4])
+print ("The element with index 7 = ", obj[7])
+#deleting the elements
+del obj[0]
+del obj[9]
+print (obj)
+
+
+
+#7
+
+#calling for attributes
+#creating class
+class MyClass:
+    #the constructor
+    def __init__(self,name):
+        #to the field of specimen
+        #assign the value
+        self.name = name
+    # the method for making strings
+    def __str__(self):
+        return self.name
+    # Method to handle the situation when
+    # an attribute is assigned a value
+    def __setattr__(self, attr, val):
+        if attr =="name":
+            self.__dict__[attr]=val
+        else:
+            print("The operation is not allowed")
+    # Method to handle the situation when
+    # an attribute value is read
+    def __getattr__(self, attr):
+        return "There are no such attribute!"
+    # Method to handle the situation when
+    # an attribute is removed
+    def __delattr__(self, attr):
+        print ("It is forbidden to delete fields!")
+#creating specimen of the class
+obj  = MyClass("output value")
+print (obj)
+obj.name = "New Value"
+print (obj)
+obj.numer = 100
+print (obj.number)
+del obj.name
+print (obj)
+
+
+#8
+
+#Reading values of the fields
+#creating class
+class MyClass:
+# The method is called if the field
+# is assigned a value
+    def  __setattr__(self, attr, val):
+        print (" The Method __setattr__ is executed: " )
+        txt="*\t to the field " +str(attr)
+        txt+="assigned the value" +str(val)
+        print (txt)
+        #Assigning a value to a field
+        self.__dict__[attr]=val
+        print ("the method __setattr__() already done!!!")
+#The method is called if
+#the field values are reading
+    def __getattribute__(self, attr):
+        print("The method  __getattribute__ is executed :" )
+        txt= "*\t reading the value of the field "+ str(attr)
+        print (txt)
+        #the result of the method
+        try:
+            #Field value - if the field exists
+            res=object.__getattribute__(self,attr)
+        except AttributeError:
+            #if there are no such field
+            res = "The specimen has no field " + str(attr)
+        print ("The method __getattribute__ finishes work")
+        return res
+# The method is called if
+#the field deleting
+    def __delattr__(self, attr):
+        print ("the method __delattr__ is executed: ")
+        txt="*\t Deleting the field" + str(attr)
+        print (txt)
+        try:
+            #deleting the field if the field exists
+            del self.__dict__[attr]
+        except KeyError:
+            #if there are no such field
+            print ("We can not delete the field" + str(attr))
+        print ("the method __delattr__() done")
+#create object
+obj=MyClass()
+#assign the value to the field name
+obj.name = "Python"
+print ("the value of thr field name is ", obj.name)
+del obj.name
+print (obj.name)
+del obj.name
+
+
